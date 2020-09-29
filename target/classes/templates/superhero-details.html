@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="Blocks/header :: myheader"></header>
+<div class="container mt-5">
+    <div th:each="el : ${post}" class="alert alert-info mt-2">
+        <h1 th:text="${el.name}"/>
+        <p th:text="${el.firstName}"/>
+        <p th:text="${el.lastName}"/>
+        <p th:text="${el.age}"/>
+        <p th:text="${el.super_power}"/>
+        <a th:href=" '/superhero/' + ${el.hero_id} + '/edit'" class="btn btn-warning">Редагувати</a><br><br>
+            <form th:action="'/superhero/' + ${el.hero_id} + '/remove'" method="post">
+                <button class="btn btn-warning" type="submit">Видалити статю</button><br><br><br>
+                <a th:href=" '/superhero/' + ${el.hero_id} + '/friends'" class="btn btn-warning">Друзі</a><br><br>
+                <a th:href=" '/superhero/' + ${el.hero_id} + '/enemies'" class="btn btn-warning">Вороги</a><br><br>
+             </form>
+
+<!--        <a class="p-2 text-dark" href="/blog/add">Добавити супергероя</a>-->
+
+
+
+
+
+
+    </div>
+</div>
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

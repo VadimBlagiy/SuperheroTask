@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="test3-6a52c3c3d68518d81efa4361403e1ee98af78f03" />
+        <module name="1" />
+        <module name="new-test-4" />
+        <module name="test3" />
+        <module name="проба 20.06" />
+        <module name="SuperheroTask" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="1" options="-parameters" />
+      <module name="SuperheroTask" options="-parameters" />
+      <module name="new-test-4" options="-parameters" />
+      <module name="test3" options="-parameters" />
+      <module name="test3-6a52c3c3d68518d81efa4361403e1ee98af78f03" options="-parameters" />
+      <module name="проба 20.06" options="-parameters" />
+    </option>
+  </component>
+</project>
