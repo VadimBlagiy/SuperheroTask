@@ -1,6 +1,5 @@
 package ua.test.task.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +15,15 @@ import java.util.Optional;
 @Controller
 public class SuperheroController {
 
-
     @Autowired
     private SuperheroRepository superheroRepository;
 
-// показує всіх супергероїв які є в БД
     @GetMapping("/superhero")
     public String allHero(Model model) {
         Iterable<Superhero> best = superheroRepository.findAll();
         model.addAttribute("best", best);
         return "superhero";
     }
-
-
 
     @GetMapping("/superhero/add")
     public String heroAdd(Model model) {
@@ -85,25 +80,5 @@ public class SuperheroController {
         superheroRepository.delete(superhero);
         return "redirect:/superhero";
     }
-
-
-
-//    @GetMapping("/superhero/{id}/friends")
-//    public String friends(@PathVariable(value = "id") long heroid, Model model) {
-//        Optional<Superhero> superhero = superheroRepository.findById(heroid);
-//        ArrayList<Superhero> res = new ArrayList<>();
-//        superhero.ifPresent(res::add);
-//        model.addAttribute("post", res);
-//        return "friends";
-//    }
-//
-//    @GetMapping("/superhero/{id}/enemies")
-//    public String enemies(@PathVariable(value = "id") long heroid, Model model) {
-//        Optional<Superhero> superhero = superheroRepository.findById(heroid);
-//        ArrayList<Superhero> res = new ArrayList<>();
-//        superhero.ifPresent(res::add);
-//        model.addAttribute("post", res);
-//        return "enemies";
-//    }
 
 }

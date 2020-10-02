@@ -3,24 +3,28 @@ package ua.test.task.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import ua.test.task.models.Friends;
-import ua.test.task.models.Superhero;
-import ua.test.task.repo.SuperheroRepository;
+import ua.test.task.repo.FriendsOfHeroRepository;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class FriendsController {
 
     @Autowired
-    private SuperheroRepository superheroRepository;
+    private FriendsOfHeroRepository friendsOfHeroRepository;
 
-//    @PostMapping("/superhero/add")
-//    public String friendsAdd(@RequestParam String name, Model model) {
-//        Friends friends = new Friends();
-//        superheroRepository.save(friends);
-//        return "redirect:/superhero";
-//    }
+    @GetMapping("/superhero/{id}/friends")
+    public String superheroFriends(@PathVariable(value = "id") long id, Model model) {
+        Optional<Friends> friends = friendsOfHeroRepository.findById(id);
+        ArrayList<Friends> fri = new ArrayList<>();
+        friends.ifPresent(fri::add);
+        model.addAttribute("friend", fri);
+        return "friends";
+    }
 
 }
 

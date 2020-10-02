@@ -7,14 +7,14 @@
 <body>
 <header th:insert="Blocks/header :: myheader"></header>
 <div class="container mt-5 mb-5">
-    <H1>Створити супергероя</H1>
+    <H1>Create a superhero</H1>
         <form action="/superhero/add" method="post">
-            <input type="text" name="name" placeholder="Введіть геройське ім'я" class="form-control"><br>
-            <input type="text" name="firstName" placeholder="Введіть справжнє ім'я" class="form-control"><br>
-            <input type="text" name="lastName" placeholder="Введіть прізвище" class="form-control"><br>
-            <input type="text" name="age" placeholder="Введіть вік супергероя" class="form-control"><br>
-            <input type="text" name="super_power" placeholder="Введіть супер силу" class="form-control"><br>
-            <button type="submit" class="btn btn-success">Добавити</button><br>
+            <input type="text" name="name" placeholder="Enter a heroic name" class="form-control"><br>
+            <input type="text" name="firstName" placeholder="Enter first name" class="form-control"><br>
+            <input type="text" name="lastName" placeholder="Enter last name" class="form-control"><br>
+            <input type="text" name="age" placeholder="Enter age" class="form-control"><br>
+            <input type="text" name="super_power" placeholder="Enter super power" class="form-control"><br>
+            <button type="submit" class="btn btn-success">Add</button><br>
         </form>
 </div>
 <div th:insert="Blocks/footer :: footer"></div>

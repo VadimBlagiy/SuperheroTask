@@ -13,19 +13,12 @@
         <p th:text="${el.lastName}"/>
         <p th:text="${el.age}"/>
         <p th:text="${el.super_power}"/>
-        <a th:href=" '/superhero/' + ${el.hero_id} + '/edit'" class="btn btn-warning">Редагувати</a><br><br>
-            <form th:action="'/superhero/' + ${el.hero_id} + '/remove'" method="post">
-                <button class="btn btn-warning" type="submit">Видалити статю</button><br><br><br>
-                <a th:href=" '/superhero/' + ${el.hero_id} + '/friends'" class="btn btn-warning">Друзі</a><br><br>
-                <a th:href=" '/superhero/' + ${el.hero_id} + '/enemies'" class="btn btn-warning">Вороги</a><br><br>
+        <a th:href=" '/superhero/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a><br><br>
+            <form th:action="'/superhero/' + ${el.id} + '/remove'" method="post">
+                <button class="btn btn-warning" type="submit">Remove</button><br><br><br>
+                <a th:href=" '/superhero/' + ${el.id} + '/friends'" class="btn btn-warning">Friends</a><br><br>
+                <a th:href=" '/superhero/' + ${el.id} + '/enemies'" class="btn btn-warning">Enemies</a><br><br>
              </form>
-
-<!--        <a class="p-2 text-dark" href="/blog/add">Добавити супергероя</a>-->
-
-
-
-
-
 
     </div>
 </div>

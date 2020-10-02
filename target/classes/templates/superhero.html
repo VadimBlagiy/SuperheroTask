@@ -10,9 +10,8 @@
     <H1>Superhero</H1>
     <H1></H1>
     <a th:each="el : ${best}" >
-        <h3 th:text="${el.name}"/>
-        <p th:text="${el.super_power}"/>
-        <a th:href=" '/superhero/' + ${el.hero_id}" class="btn btn-success"/>Детально</a>
+        <br><br><h3 th:text="${el.name}"/>
+         <a th:href=" '/superhero/' + ${el.id}" class="btn btn-success"/>Detail</a><br><br>
     </div>
 </div>
 <div th:insert="Blocks/footer :: footer"></div>

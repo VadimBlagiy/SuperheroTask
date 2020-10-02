@@ -1,24 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Редагування</title>
+    <title>Edit</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
 <header th:insert="Blocks/header :: myheader"></header>
 <div class="container mt-5 mb-5">
-    <H1>Редагування супергероїв</H1>
+    <H1>Edit superhero</H1>
            <div th:each="el : ${post}">
                 <form  method="post">
 
-                    <input type="text" th:value="${el.name}" name="name" placeholder="Введіть геройське ім'я" class="form-control"><br>
-                    <input type="text" th:value="${el.firstName}" name="firstName" placeholder="Введіть справжнє ім'я" class="form-control"><br>
-                    <input type="text" th:value="${el.lastName}" name="lastName" placeholder="Введіть прізвище" class="form-control"><br>
-                    <input type="text" th:value="${el.age}" name="age" placeholder="Введіть вік супергероя" class="form-control"><br>
-                    <input type="text" th:value="${el.super_power}" name="super_power" placeholder="Введіть суперсилу" class="form-control"><br>
+                    <input type="text" th:value="${el.name}" name="name" placeholder="Enter a heroic name" class="form-control"><br>
+                    <input type="text" th:value="${el.firstName}" name="firstName" placeholder="Enter firstName" class="form-control"><br>
+                    <input type="text" th:value="${el.lastName}" name="lastName" placeholder="Enter lasttName" class="form-control"><br>
+                    <input type="text" th:value="${el.age}" name="age" placeholder="Enter age" class="form-control"><br>
+                    <input type="text" th:value="${el.super_power}" name="super_power" placeholder="Enter super power" class="form-control"><br>
 
-                    <button type="submit" class="btn btn-success">Оновити</button><br>
+                    <button type="submit" class="btn btn-success">Update</button><br>
                 </form>>
            </div>
 </div>

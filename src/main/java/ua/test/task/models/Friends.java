@@ -10,31 +10,30 @@ public class Friends {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long hero_id;
-        private String name;
+        private Long id;
+        private String names;
 
-
-    public Long getHero_id() {
-        return hero_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setHero_id(Long id) {
-        this.hero_id = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public Friends() {
     }
 
-    public Friends(String name) {
-        this.name = name;
+    public Friends(String names) {
+        this.names = names;
     }
 }
 

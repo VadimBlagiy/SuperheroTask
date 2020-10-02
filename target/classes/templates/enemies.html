@@ -7,19 +7,13 @@
 <body>
 <header th:insert="Blocks/header :: myheader"></header>
 <div class="container mt-5">
-   <h2>Enemies<h2>
-       <a th:each="el : ${post}" >
-           <h3 th:text="${el.name}"/></a>
-
-        </form>
-
+    <H1>Enemies</H1>
+    <H1></H1>
+    <a th:each="el : ${enemiesHero}" >
+        <h3 th:text="${el.name}"/>
 
 
-
-
-
-
-    </div>
+</div>
 </div>
 <div th:insert="Blocks/footer :: footer"></div>
 </body>

@@ -8,7 +8,7 @@ public class Superhero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long hero_id;
+    private Long id;
     private String name;
     private String firstName;
     private String lastName;
@@ -16,12 +16,12 @@ public class Superhero {
     private String super_power;
 
 
-    public Long getHero_id() {
-        return hero_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setHero_id(Long id) {
-        this.hero_id = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
