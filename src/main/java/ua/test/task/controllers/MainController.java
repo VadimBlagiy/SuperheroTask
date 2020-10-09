@@ -1,16 +1,18 @@
 package ua.test.task.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Controller
+@RestController
 public class MainController {
 
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("title","Головна сторінка" );
-        return "home";
+    //повертає json
+    @RequestMapping( value = "/", method = RequestMethod.GET)
+    public Object home() {
+        List <String> homePage = new ArrayList<>();
+     homePage.add("REST service. Technologies used: Spring boot, Postgresql");
+        return homePage;
     }
 
 }
