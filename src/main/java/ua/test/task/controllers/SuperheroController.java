@@ -7,65 +7,54 @@ import ua.test.task.models.Superhero;
 import ua.test.task.service.BusinessLogicService;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class SuperheroController {
 
-      private BusinessLogicService businessLogicService;
+    private BusinessLogicService businessLogicService;
 
-      @Autowired
-      public void superheroController(BusinessLogicService businessLogicService) {
-      this.businessLogicService = businessLogicService;
-      }
+    @Autowired
+    public void superheroController(BusinessLogicService businessLogicService) {
+        this.businessLogicService = businessLogicService;
+    }
 
 
-    // повертає json
     @RequestMapping(value = "/superhero", method = RequestMethod.GET)
-//            produces = { MediaType.APPLICATION_JSON_VALUE })
     public Object allHero() {
-         Iterable<Superhero> best = businessLogicService.findAll();
+        Iterable<Superhero> best = businessLogicService.findAll();
         return best;
     }
 
 
-    // відправляє json
     @RequestMapping(value = "/superhero/add", method = RequestMethod.POST)
-    public Object superheroAdd(@RequestParam String name, @RequestParam String firstName, @RequestParam String lastName,
-                               @RequestParam int age, @RequestParam String super_power) {
-        Superhero superhero = new Superhero(name, firstName, lastName, age, super_power);
+    public Object superheroAdd(@RequestParam String name,
+                               @RequestParam String firstName,
+                               @RequestParam String lastName,
+                               @RequestParam int age,
+                               @RequestParam String super_power,
+                               @RequestParam List<Superhero> friends,
+                               @RequestParam List<Superhero> enemies) {
+        Superhero superhero = new Superhero(name, firstName, lastName, age, super_power, friends, enemies);
         businessLogicService.save(superhero);
         return superhero;
     }
 
-    // повертає json
-    @RequestMapping(value =  "/superhero/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/superhero/{id}", method = RequestMethod.GET)
     public Object superheroDetails(@PathVariable(value = "id") long heroid) {
         Optional<Superhero> superhero = businessLogicService.findById(heroid);
         return superhero;
     }
 
 
-    //повертає json
-    @RequestMapping( value = "/superhero/{id}/edit", method = RequestMethod.GET)
-    public Object heroEdit(@PathVariable(value = "id") long id, Model model) {
-        if (!businessLogicService.existsById(id)) {
-//            return "redirect:/superhero";
-        }
-        Optional<Superhero> superhero = businessLogicService.findById(id);
-        ArrayList<Superhero> res = new ArrayList<>();
-        superhero.ifPresent(res::add);
-        model.addAttribute("post", res);
-        return superhero;
-    }
-
-
-    // оновлює данні
-    @RequestMapping(value = "/superhero/{id}/edit", method = RequestMethod.PUT)
-    public Object HeroUpdate ( @PathVariable(value = "id") long id,  @RequestParam String name,
-                               @RequestParam String firstName,
-                               @RequestParam String lastName,  @RequestParam int age,
-                               @RequestParam String super_power, Model model) {
+    @RequestMapping(value = "/superhero/{id}/edit-hero", method = RequestMethod.PUT)
+    public Object HeroUpdate(@PathVariable(value = "id") long id,
+                             @RequestParam String name,
+                             @RequestParam String firstName,
+                             @RequestParam String lastName,
+                             @RequestParam int age,
+                             @RequestParam String super_power) {
         Superhero superhero = businessLogicService.getOne(id);
         superhero.setName(name);
         superhero.setFirstName(firstName);
@@ -77,11 +66,47 @@ public class SuperheroController {
     }
 
 
-    // видаляє
-    @RequestMapping(value = "/superhero/{id}/remove", method = RequestMethod.DELETE)
-    public void heroDelete(@PathVariable(value = "id") long id, Model model) {
-      businessLogicService.getOne(id);
+    @RequestMapping(value = "/superhero/{id}/remove-hero", method = RequestMethod.DELETE)
+    public void heroDelete(@PathVariable(value = "id") long id) {
+        businessLogicService.getOne(id);
         businessLogicService.deleteById(id);
     }
+
+
+    @RequestMapping(value = "/superhero/{id}/add-friends", method = RequestMethod.POST)
+    public Object addFriend (@PathVariable(value = "id") long id, @RequestParam List<Superhero> friends) {
+        Optional<Superhero> findAllHeroe = businessLogicService.findById(id);
+        Superhero superhero = businessLogicService.getOne(id);
+        superhero.setFriends(friends);
+        businessLogicService.save(superhero);
+        return superhero;
+    }
+
+
+    @RequestMapping(value = "/superhero/{id}/add-enemies", method = RequestMethod.POST)
+    public Object addEnemy (@PathVariable(value = "id") long id, @RequestParam List<Superhero> enemies) {
+        Optional<Superhero> findAllHeroe = businessLogicService.findById(id);
+        Superhero superhero = businessLogicService.getOne(id);
+        superhero.setEnemies(enemies);
+        businessLogicService.save(superhero);
+        return superhero;
+    }
+
+
+    @RequestMapping(value = "/superhero/{id}/remove-friends", method = RequestMethod.DELETE)
+    public void friendToDelete(@PathVariable(value = "id") long id, @RequestParam List<Superhero> friends) {
+        Superhero superhero = businessLogicService.getOne(id);
+        superhero.getFriends().removeAll(friends);
+        businessLogicService.save(superhero);
+    }
+
+
+    @RequestMapping(value = "/superhero/{id}/remove-enemy", method = RequestMethod.DELETE)
+    public void enemyToDelete(@PathVariable(value = "id") long id, @RequestParam List <Superhero> enemies) {
+        Superhero superhero = businessLogicService.getOne(id);
+        superhero.getEnemies().removeAll(enemies);
+        businessLogicService.save(superhero);
+    }
+
 
 }

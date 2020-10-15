@@ -7,7 +7,6 @@ import java.util.List;
 @RestController
 public class MainController {
 
-    //повертає json
     @RequestMapping( value = "/", method = RequestMethod.GET)
     public Object home() {
         List <String> homePage = new ArrayList<>();

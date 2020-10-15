@@ -43,6 +43,9 @@ public class BusinessLogicService {
     }
 
     public void deleteById(long id) {
+
         superheroRepository.deleteById(id);
     }
+
+
 }

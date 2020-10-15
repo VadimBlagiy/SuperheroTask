@@ -2,6 +2,7 @@ package ua.test.task.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Superhero {
@@ -14,6 +15,13 @@ public class Superhero {
     private String lastName;
     private int age;
     private String super_power;
+
+    @ManyToMany( fetch = FetchType.LAZY)
+    private List <Superhero> friends;
+
+    @ManyToMany ( fetch = FetchType.LAZY)
+    private List <Superhero> enemies;
+
 
 
     public Long getId() {
@@ -64,14 +72,33 @@ public class Superhero {
         this.super_power = super_power;
     }
 
-    public Superhero() {
+    public List<Superhero> getFriends() {
+        return friends;
     }
 
-    public Superhero(String name, String firstName, String lastName, int age, String super_power) {
+    public void setFriends(List<Superhero> friends) {
+        this.friends = friends;
+    }
+
+    public List<Superhero> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(List<Superhero> enemies) {
+        this.enemies = enemies;
+    }
+
+    public Superhero(String name, String firstName, String lastName, int age, String super_power, List<Superhero> friends, List<Superhero> enemies) {
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.super_power = super_power;
+        this.friends = friends;
+        this.enemies = enemies;
     }
-}
+
+    public Superhero() {
+    }
+
+ }

@@ -4,7 +4,7 @@ db:
 image: postgres
 environment:
 POSTGRES_USER: root
-POSTGRES_PASSWORD: root
+POSTGRES_PASSWORD: 123
 POSTGRES_DB: skysoft
 ports:
   - 5432:5432
