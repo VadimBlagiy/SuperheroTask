@@ -1,4 +1,4 @@
-package ua.test.task.repo;
+package ua.test.task.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ua.test.task.models.Superhero;

@@ -1,112 +1,62 @@
 package ua.test.task.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.test.task.dto.SuperheroRequest;
+import ua.test.task.dto.SuperheroResponse;
 import ua.test.task.models.Superhero;
-import ua.test.task.service.BusinessLogicService;
+import ua.test.task.service.SuperheroService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class SuperheroController {
 
-    private BusinessLogicService businessLogicService;
+    private SuperheroService superheroService;
 
     @Autowired
-    public void superheroController(BusinessLogicService businessLogicService) {
-        this.businessLogicService = businessLogicService;
+    public void superheroController(SuperheroService superheroService) {
+        this.superheroService = superheroService;
     }
-
 
     @RequestMapping(value = "/superhero", method = RequestMethod.GET)
     public Object allHero() {
-        Iterable<Superhero> best = businessLogicService.findAll();
+        Iterable<Superhero> best = superheroService.findAll();
         return best;
     }
 
-
-    @RequestMapping(value = "/superhero/add", method = RequestMethod.POST)
-    public Object superheroAdd(@RequestParam String name,
-                               @RequestParam String firstName,
-                               @RequestParam String lastName,
-                               @RequestParam int age,
-                               @RequestParam String super_power,
-                               @RequestParam List<Superhero> friends,
-                               @RequestParam List<Superhero> enemies) {
-        Superhero superhero = new Superhero(name, firstName, lastName, age, super_power, friends, enemies);
-        businessLogicService.save(superhero);
-        return superhero;
+    @RequestMapping(value = "/superhero", method = RequestMethod.POST)
+    public Superhero superheroAdd(SuperheroRequest superheroRequest) {
+        return superheroService.createSuperhero(superheroRequest);
     }
 
     @RequestMapping(value = "/superhero/{id}", method = RequestMethod.GET)
-    public Object superheroDetails(@PathVariable(value = "id") long heroid) {
-        Optional<Superhero> superhero = businessLogicService.findById(heroid);
-        return superhero;
+    public SuperheroResponse superheroDetails(@PathVariable(value = "id") long superheroId) {
+        Superhero superhero = superheroService.findById(superheroId);
+        return new SuperheroResponse(superhero.getName(), superhero.getFirstName(), superhero.getLastName(),
+                superhero.getAge(), superhero.getSuper_power(), superhero.getFriends(), superhero.getEnemies());
     }
 
-
-    @RequestMapping(value = "/superhero/{id}/edit-hero", method = RequestMethod.PUT)
-    public Object HeroUpdate(@PathVariable(value = "id") long id,
-                             @RequestParam String name,
-                             @RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam int age,
-                             @RequestParam String super_power) {
-        Superhero superhero = businessLogicService.getOne(id);
-        superhero.setName(name);
-        superhero.setFirstName(firstName);
-        superhero.setLastName(lastName);
-        superhero.setAge(age);
-        superhero.setSuper_power(super_power);
-        businessLogicService.save(superhero);
-        return superhero;
+    @RequestMapping(value = "/superhero/{id}", method = RequestMethod.PUT)
+    public Object heroUpdate(@PathVariable(value = "id") long id, SuperheroRequest superheroRequest) {
+        return superheroService.updateSuperhero(id ,superheroRequest);
     }
 
-
-    @RequestMapping(value = "/superhero/{id}/remove-hero", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/superhero/{id}", method = RequestMethod.DELETE)
     public void heroDelete(@PathVariable(value = "id") long id) {
-        businessLogicService.getOne(id);
-        businessLogicService.deleteById(id);
+        superheroService.deleteById(id);
     }
 
-
-    @RequestMapping(value = "/superhero/{id}/add-friends", method = RequestMethod.POST)
-    public Object addFriend (@PathVariable(value = "id") long id, @RequestParam List<Superhero> friends) {
-        Optional<Superhero> findAllHeroe = businessLogicService.findById(id);
-        Superhero superhero = businessLogicService.getOne(id);
-        superhero.setFriends(friends);
-        businessLogicService.save(superhero);
-        return superhero;
+    @RequestMapping(value = "/superhero/{id}/friends", method = RequestMethod.POST)
+    public Object addFriendSuperhero(@PathVariable(value = "id") long id,
+                                     @RequestParam List<Long> friends,SuperheroRequest superheroRequest) {
+        return superheroService.addFriend(id, superheroRequest);
     }
 
-
-    @RequestMapping(value = "/superhero/{id}/add-enemies", method = RequestMethod.POST)
-    public Object addEnemy (@PathVariable(value = "id") long id, @RequestParam List<Superhero> enemies) {
-        Optional<Superhero> findAllHeroe = businessLogicService.findById(id);
-        Superhero superhero = businessLogicService.getOne(id);
-        superhero.setEnemies(enemies);
-        businessLogicService.save(superhero);
-        return superhero;
+    @RequestMapping(value = "/superhero/{id}/enemies", method = RequestMethod.POST)
+    public Object addEnemySuperhero(@PathVariable(value = "id") long id,
+                                    @RequestParam List<Long> enemies, SuperheroRequest superheroRequest) {
+        return superheroService.addEnemy(id, superheroRequest);
     }
-
-
-    @RequestMapping(value = "/superhero/{id}/remove-friends", method = RequestMethod.DELETE)
-    public void friendToDelete(@PathVariable(value = "id") long id, @RequestParam List<Superhero> friends) {
-        Superhero superhero = businessLogicService.getOne(id);
-        superhero.getFriends().removeAll(friends);
-        businessLogicService.save(superhero);
-    }
-
-
-    @RequestMapping(value = "/superhero/{id}/remove-enemy", method = RequestMethod.DELETE)
-    public void enemyToDelete(@PathVariable(value = "id") long id, @RequestParam List <Superhero> enemies) {
-        Superhero superhero = businessLogicService.getOne(id);
-        superhero.getEnemies().removeAll(enemies);
-        businessLogicService.save(superhero);
-    }
-
 
 }

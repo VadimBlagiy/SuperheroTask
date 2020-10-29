@@ -1,34 +1,29 @@
-package ua.test.task.models;
+package ua.test.task.dto;
 
-import javax.persistence.*;
+import ua.test.task.models.Superhero;
+
 import java.util.List;
 
-@Entity
-public class Superhero {
+public class SuperheroResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String name;
     private String firstName;
     private String lastName;
     private int age;
     private String super_power;
-
-    @ManyToMany( fetch = FetchType.LAZY)
-    private List <Superhero> friends;
-
-    @ManyToMany ( fetch = FetchType.LAZY)
+    private List<Superhero> friends;
     private List <Superhero> enemies;
 
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public SuperheroResponse(String name, String firstName, String lastName, int age, String super_power,
+                             List<Superhero> friends, List<Superhero> enemies) {
+        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.super_power = super_power;
+        this.friends = friends;
+        this.enemies = enemies;
     }
 
     public String getName() {
@@ -86,19 +81,4 @@ public class Superhero {
     public void setEnemies(List<Superhero> enemies) {
         this.enemies = enemies;
     }
-
-    public Superhero(String name, String firstName, String lastName, int age, String super_power,
-                     List<Superhero> friends, List<Superhero> enemies) {
-        this.name = name;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.super_power = super_power;
-        this.friends = friends;
-        this.enemies = enemies;
-    }
-
-    public Superhero() {
-    }
-
- }
+}

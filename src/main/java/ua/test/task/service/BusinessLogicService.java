@@ -1,51 +1,22 @@
 package ua.test.task.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import ua.test.task.dto.SuperheroRequest;
 import ua.test.task.models.Superhero;
-import ua.test.task.repo.SuperheroRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class BusinessLogicService {
+public interface BusinessLogicService {
+    List<Superhero> findAll();
 
-    private SuperheroRepository superheroRepository;
+    Superhero findById(long superheroId);
 
-    @Autowired
-    public BusinessLogicService(SuperheroRepository superheroRepository) {
-        this.superheroRepository = superheroRepository;
-    }
+    void deleteById(long id);
 
+    Superhero createSuperhero(SuperheroRequest superheroRequest);
 
-    public List<Superhero> findAll() {
+    Superhero updateSuperhero(long id, SuperheroRequest superheroRequest);
 
-        return  superheroRepository.findAll();
-    }
+    Superhero addFriend(long id, SuperheroRequest superheroRequest);
 
-    public void save(Superhero superhero) {
-        superheroRepository.save(superhero);
-    }
-
-
-    public Optional<Superhero> findById(long heroid) {
-        return superheroRepository.findById(heroid);
-    }
-
-
-    public boolean existsById(long id) {
-        return superheroRepository.existsById(id);
-    }
-
-    public Superhero getOne(long id) {
-        return superheroRepository.getOne(id);
-    }
-
-    public void deleteById(long id) {
-
-        superheroRepository.deleteById(id);
-    }
-
-
+    Superhero addEnemy(long id, SuperheroRequest superheroRequest);
 }
