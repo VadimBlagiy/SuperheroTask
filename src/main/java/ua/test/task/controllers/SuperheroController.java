@@ -47,15 +47,13 @@ public class SuperheroController {
         superheroService.deleteById(id);
     }
 
-    @RequestMapping(value = "/superhero/{id}/friends", method = RequestMethod.POST)
-    public Object addFriendSuperhero(@PathVariable(value = "id") long id,
-                                     @RequestParam List<Long> friends,SuperheroRequest superheroRequest) {
+    @RequestMapping(value = "/superhero/{id}/friends", method = RequestMethod.PUT)
+    public Object addFriendSuperhero(@PathVariable(value = "id") long id, SuperheroRequest superheroRequest) {
         return superheroService.addFriend(id, superheroRequest);
     }
 
-    @RequestMapping(value = "/superhero/{id}/enemies", method = RequestMethod.POST)
-    public Object addEnemySuperhero(@PathVariable(value = "id") long id,
-                                    @RequestParam List<Long> enemies, SuperheroRequest superheroRequest) {
+    @RequestMapping(value = "/superhero/{id}/enemies", method = RequestMethod.PUT)
+    public Object addEnemySuperhero(@PathVariable(value = "id") long id, SuperheroRequest superheroRequest) {
         return superheroService.addEnemy(id, superheroRequest);
     }
 
