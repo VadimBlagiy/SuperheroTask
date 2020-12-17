@@ -15,6 +15,7 @@ public class Superhero {
     private int age;
     private String super_power;
 
+
     @ManyToMany( fetch = FetchType.LAZY)
     private List <Superhero> friends;
 

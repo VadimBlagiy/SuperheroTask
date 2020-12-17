@@ -2,14 +2,15 @@ package ua.test.task.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ua.test.task.dto.FriendsIds;
 import ua.test.task.dto.SuperheroRequest;
 import ua.test.task.dto.SuperheroResponse;
 import ua.test.task.models.Superhero;
 import ua.test.task.service.SuperheroService;
 
-import java.util.List;
+import java.util.ArrayList;
 
-@RestController
+@RestController()
 public class SuperheroController {
 
     private SuperheroService superheroService;
@@ -26,7 +27,7 @@ public class SuperheroController {
     }
 
     @RequestMapping(value = "/superhero", method = RequestMethod.POST)
-    public Superhero superheroAdd(SuperheroRequest superheroRequest) {
+    public Superhero superheroAdd(@RequestBody SuperheroRequest superheroRequest) {
         return superheroService.createSuperhero(superheroRequest);
     }
 
@@ -38,7 +39,7 @@ public class SuperheroController {
     }
 
     @RequestMapping(value = "/superhero/{id}", method = RequestMethod.PUT)
-    public Object heroUpdate(@PathVariable(value = "id") long id, SuperheroRequest superheroRequest) {
+    public Object heroUpdate(@PathVariable(value = "id") long id, @RequestBody SuperheroRequest superheroRequest) {
         return superheroService.updateSuperhero(id ,superheroRequest);
     }
 
@@ -47,14 +48,22 @@ public class SuperheroController {
         superheroService.deleteById(id);
     }
 
+
+
+
+
+
+
+    //todo зробити щоб добавлялись друзі
     @RequestMapping(value = "/superhero/{id}/friends", method = RequestMethod.PUT)
-    public Object addFriendSuperhero(@PathVariable(value = "id") long id, SuperheroRequest superheroRequest) {
-        return superheroService.addFriend(id, superheroRequest);
+    public Superhero addFriendSuperhero(@PathVariable(value = "id") long id, @RequestBody FriendsIds newFriends) {
+        return superheroService.addFriends(id, newFriends);
     }
 
-    @RequestMapping(value = "/superhero/{id}/enemies", method = RequestMethod.PUT)
-    public Object addEnemySuperhero(@PathVariable(value = "id") long id, SuperheroRequest superheroRequest) {
-        return superheroService.addEnemy(id, superheroRequest);
-    }
+    //todo зробити щоб добавлялись вороги
+//    @RequestMapping(value = "/superhero/{id}/enemies", method = RequestMethod.PUT)
+//    public Superhero addEnemySuperhero(@PathVariable(value = "id") long id,   @RequestBody FriendsIds friendsIds) {
+//        return superheroService.addEnemy(id, friendsIds);
+//    }
 
 }

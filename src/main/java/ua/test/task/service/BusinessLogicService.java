@@ -1,5 +1,6 @@
 package ua.test.task.service;
 
+import ua.test.task.dto.FriendsIds;
 import ua.test.task.dto.SuperheroRequest;
 import ua.test.task.models.Superhero;
 
@@ -16,7 +17,7 @@ public interface BusinessLogicService {
 
     Superhero updateSuperhero(long id, SuperheroRequest superheroRequest);
 
-    Superhero addFriend(long id, SuperheroRequest superheroRequest);
+    Superhero addFriends(long id, FriendsIds newFriends);
 
-    Superhero addEnemy(long id, SuperheroRequest superheroRequest);
+//    Superhero addEnemy(long id, FriendsIds friendsIds);
 }

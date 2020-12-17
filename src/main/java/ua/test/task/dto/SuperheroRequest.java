@@ -13,21 +13,18 @@ public class SuperheroRequest {
     private String lastName;
     private int age;
     private String super_power;
-    private List<Superhero> friends;
-    private List <Superhero> enemies;
+
 
     public SuperheroRequest() {
     }
 
-    public SuperheroRequest(String name, String firstName, String lastName, int age, String super_power,
-                            List<Superhero> friends, List<Superhero> enemies) {
+    public SuperheroRequest(String name, String firstName, String lastName, int age, String super_power) {
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.super_power = super_power;
-        this.friends = friends;
-        this.enemies = enemies;
+
     }
 
     public String getName() {
@@ -70,20 +67,5 @@ public class SuperheroRequest {
         this.super_power = super_power;
     }
 
-    public List<Superhero> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<Superhero> friends) {
-        this.friends = friends;
-    }
-
-    public List<Superhero> getEnemies() {
-        return enemies;
-    }
-
-    public void setEnemies(List<Superhero> enemies) {
-        this.enemies = enemies;
-    }
 
 }

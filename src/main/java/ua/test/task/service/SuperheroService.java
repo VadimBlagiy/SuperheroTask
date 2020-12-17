@@ -2,12 +2,14 @@ package ua.test.task.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.test.task.dto.FriendsIds;
 import ua.test.task.dto.SuperheroRequest;
 import ua.test.task.exception.ResourceNotFoundException;
 import ua.test.task.models.Superhero;
 import ua.test.task.repository.SuperheroRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SuperheroService implements BusinessLogicService {
@@ -43,8 +45,6 @@ public class SuperheroService implements BusinessLogicService {
         superhero.setLastName(superheroRequest.getLastName());
         superhero.setAge(superheroRequest.getAge());
         superhero.setSuper_power(superheroRequest.getSuper_power());
-        superhero.setFriends(superheroRequest.getFriends());
-        superhero.setEnemies(superheroRequest.getEnemies());
         return superheroRepository.save(superhero);
     }
 
@@ -56,22 +56,27 @@ public class SuperheroService implements BusinessLogicService {
             superhero.setLastName(superheroRequest.getLastName());
             superhero.setAge(superheroRequest.getAge());
             superhero.setSuper_power(superheroRequest.getSuper_power());
-            superhero.setFriends(superheroRequest.getFriends());
-            superhero.setEnemies(superheroRequest.getEnemies());
             return superheroRepository.save(superhero);
         }
 
-    @Override
-    public Superhero addFriend(long id, SuperheroRequest superheroRequest) {
-        Superhero superhero = superheroRepository.getOne(id);
-        superhero.setFriends(superheroRequest.getFriends());
-        return superheroRepository.save(superhero);
-    }
+
+
+        //все непагано  АЛЕ не працю наступне: добавити друзів та ворогів не виходить!!!!(((
 
     @Override
-    public Superhero addEnemy(long id, SuperheroRequest superheroRequest) {
-        Superhero superhero = superheroRepository.getOne(id);
-        superhero.setEnemies(superheroRequest.getEnemies());
-        return superheroRepository.save(superhero);
+    public Superhero addFriends(long id, FriendsIds newFriends) {
+        Superhero friendlySuperhero = superheroRepository.getOne(id);
+        List<Superhero> allHeroes = superheroRepository.findAll();
+        List<Superhero> heroesToAdd = allHeroes.stream().filter(hero -> newFriends.getFriends().contains(hero.getId()))
+                .collect(Collectors.toList());
+        friendlySuperhero.setFriends(heroesToAdd);
+        return superheroRepository.save(friendlySuperhero);
     }
+
+//    @Override
+//    public Superhero addEnemy(long id, FriendsIds friendsIds) {
+////        Superhero superhero = superheroRepository.getOne(id);
+////        superhero.setEnemies(friendsIds.getEnemies());
+//        return superheroRepository.save(superhero);
+//    }
 }

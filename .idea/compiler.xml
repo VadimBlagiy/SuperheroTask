@@ -11,6 +11,8 @@
         <module name="new-test-4" />
         <module name="test3" />
         <module name="проба 20.06" />
+        <module name="SuperheroTask-master" />
+        <module name="SuperheroTask-master lesson" />
         <module name="SuperheroTask" />
       </profile>
     </annotationProcessing>
@@ -19,6 +21,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="1" options="-parameters" />
       <module name="SuperheroTask" options="-parameters" />
+      <module name="SuperheroTask-master" options="-parameters" />
+      <module name="SuperheroTask-master lesson" options="-parameters" />
       <module name="new-test-4" options="-parameters" />
       <module name="test3" options="-parameters" />
       <module name="test3-6a52c3c3d68518d81efa4361403e1ee98af78f03" options="-parameters" />
